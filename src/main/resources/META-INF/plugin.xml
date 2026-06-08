@@ -1,9 +1,14 @@
 <idea-plugin>
     <id>com.o2.commit</id>
     <name>o2commit</name>
-    <vendor email="willh2ppy@gmail.com">will</vendor>
+    <vendor email="ctwang1994@163.com">will</vendor>
 
     <description><![CDATA[
+        Generate Git commit messages with the <b>claude</b> / <b>codex</b> CLI already installed on your machine.
+        No API key, no proxy setup — o2commit reuses your local, logged-in AI CLI instead of calling any LLM API directly.
+        It reads your staged changes, builds a prompt, runs the local CLI, and fills the result back into the commit message field.
+        Just click the "✨ Generate Commit Message" button in the commit panel.
+        <br/><br/>
         使用本地已登录的 <b>claude</b> / <b>codex</b> CLI 自动生成 Git 提交信息。<br/>
         无需 API Key、无需配置网络代理 —— 直接复用你机器上装好的 AI CLI。<br/>
         在提交面板点击「✨ 生成提交信息」按钮即可。
