@@ -1,0 +1,49 @@
+<idea-plugin>
+    <id>com.o2.commit</id>
+    <name>o2commit</name>
+    <vendor email="willh2ppy@gmail.com">will</vendor>
+
+    <description><![CDATA[
+        使用本地已登录的 <b>claude</b> / <b>codex</b> CLI 自动生成 Git 提交信息。<br/>
+        无需 API Key、无需配置网络代理 —— 直接复用你机器上装好的 AI CLI。<br/>
+        在提交面板点击「✨ 生成提交信息」按钮即可。
+    ]]></description>
+
+    <change-notes><![CDATA[
+        <b>0.1.11</b>
+        <ul>
+            <li>支持 Windows(经 cmd.exe 调用本地 CLI)。</li>
+            <li>自定义提示词改为完整可编辑模板,支持占位符与「恢复默认」。</li>
+            <li>修复未勾选文件时仍可能生成提交信息的问题。</li>
+            <li>生成按钮新增 ✨ 图标。</li>
+        </ul>
+    ]]></change-notes>
+
+    <!-- 复用平台与 Git 插件能力 -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>Git4Idea</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- 应用级设置 -->
+        <applicationService serviceImplementation="com.o2.commit.settings.O2Settings"/>
+        <!-- 设置页:Settings/Preferences → Tools → o2commit -->
+        <applicationConfigurable
+                parentId="tools"
+                instance="com.o2.commit.settings.O2Configurable"
+                id="com.o2.commit.settings.O2Configurable"
+                displayName="o2commit"/>
+        <!-- 通知组 -->
+        <notificationGroup id="o2commit" displayType="BALLOON"/>
+    </extensions>
+
+    <actions>
+        <action id="o2commit.GenerateCommitMessage"
+                class="com.o2.commit.action.GenerateCommitMessageAction"
+                icon="/icons/sparkle.svg"
+                text="生成提交信息"
+                description="使用本地 AI CLI 根据已勾选的变更生成提交信息">
+            <!-- 挂到提交框右侧的标准 action 组 -->
+            <add-to-group group-id="Vcs.MessageActionGroup" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
